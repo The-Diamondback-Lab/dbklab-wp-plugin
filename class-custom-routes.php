@@ -55,6 +55,26 @@ class DBK_Custom_Routes
             $server->register_route($namespace, '/banner_article', [
                 'methods' => WP_REST_Server::READABLE,
                 'callback' => function () {
+                    // If we're not showing banner articles, don't bother searching for one.
+
+                    $cgv = $GLOBALS['cgv'];
+                    // Fail-fast
+                    if (!isset($cgv)) {
+                        return new WP_ERROR(
+                            'undefined_cgv',
+                            'Is the "Custom Global Variable" plugin installed and activated?'
+                        );
+                    }
+
+                    $show_banner_article = $GLOBALS['cgv']['show_banner_article'];
+                    // Fail-fast
+                    if (!isset($show_banner_article) or strtolower($show_banner_article) !== 'true') {
+                        return new WP_ERROR(
+                            'bad_cgv_key',
+                            'CGV key "show_banner_article" is not equal to "true" (not case sensitive)'
+                        );
+                    }
+
                     $query = new WP_Query([
                         'post_type' => 'post',
                         'meta_key' => 'banner-article',
