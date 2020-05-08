@@ -62,7 +62,8 @@ class DBK_Custom_Routes
                     if (!isset($cgv)) {
                         return new WP_ERROR(
                             'undefined_cgv',
-                            'Is the "Custom Global Variable" plugin installed and activated?'
+                            'Is the "Custom Global Variable" plugin installed and activated?',
+                            ['status' => 404]
                         );
                     }
 
@@ -71,7 +72,8 @@ class DBK_Custom_Routes
                     if (!isset($show_banner_article) or strtolower($show_banner_article) !== 'true') {
                         return new WP_ERROR(
                             'bad_cgv_key',
-                            'CGV key "show_banner_article" is not equal to "true" (not case sensitive)'
+                            'CGV key "show_banner_article" is not equal to "true" (not case sensitive)',
+                            ['status' => 404]
                         );
                     }
 
