@@ -26,8 +26,10 @@ class DBK_Custom_Routes
     public function register_featured_story()
     {
         add_action('rest_api_init', function ($server) {
-            $server->register_route('mmidbklab/v1', '/featured_story', [
-                'methods' => 'GET',
+            $namespace = 'mmidbklab/v1';
+
+            $server->register_route($namespace, '/featured_story', [
+                'methods' => WP_REST_Server::READABLE,
                 'callback' => function () {
                     $query = new WP_Query([
                         'post_type' => 'post',
@@ -47,13 +49,6 @@ class DBK_Custom_Routes
                             ['status' => 404]
                         );
                     }
-                },
-            ]);
-
-            $server->register_route('mmidbklab/v1', '/foobar', [
-                'methods' => 'GET',
-                'callback' => function () {
-                    return array_keys($GLOBALS);
                 },
             ]);
         });
