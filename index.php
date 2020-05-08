@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DBK Lab Plugin
  * Description: Custom routes and functions for the DBK Lab
- * Version: 0.1
+ * Version: 0.2
  * Author: The Diamondback Lab
  * Author URI: https://github.com/The-Diamondback-Lab
  */
